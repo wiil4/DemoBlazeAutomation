@@ -1,7 +1,9 @@
 package purchase;
 
 import conf.BaseTest;
+import demoBlaze.helpers.jsonDataHelper.JsonTestDataHelper;
 import demoBlaze.models.Product;
+import demoBlaze.models.testData.ProductSelection;
 import demoBlaze.models.PurchaseData;
 import demoBlaze.tasks.cart.GetOrder;
 import demoBlaze.tasks.cart.Order;
@@ -19,27 +21,30 @@ import demoBlaze.tasks.purchaseDoneModal.GetPurchase;
 import demoBlaze.tasks.purchaseDoneModal.GetThankPurchase;
 import demoBlaze.tasks.purchaseDoneModal.IsPurchaseDoneDisplayed;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.io.FileNotFoundException;
+
 public class PurchaseProductTest extends BaseTest {
-    private String categoryName = "Laptops";
-    private String productName = "MacBook air";
 
-    @Test(description = "Verify product purchase by product name")
-    public void purchaseProductByName(){
+    public static String loginTestDataPath = "resources/testdata/purchase/";
 
-        SelectCategory.byName(driver, categoryName);
-        int selectedProductPrice = SaveProduct.price(driver,productName);
-        SelectProduct.byName(driver, productName);
+    @Test(description = "Verify product purchase by product name", dataProvider = "ProductPurchaseDataProvider")
+    public void purchaseProductByName(ProductSelection product){
+
+        SelectCategory.byName(driver, product.getCategory());
+        int selectedProductPrice = SaveProduct.price(driver,product.getName());
+        SelectProduct.byName(driver, product.getName());
         Product chosenProduct = GetProduct.info(driver);
 
-        Assert.assertEquals(chosenProduct.getName(), productName);
+        Assert.assertEquals(chosenProduct.getName(), product.getName());
         Assert.assertEquals(chosenProduct.getPrice(), selectedProductPrice);
         AddProduct.toCart(driver);
         SelectNav.cart(driver);
 
         Product productInCar = GetOrder.info(driver);
-        Assert.assertEquals(productInCar.getName(), productName);
+        Assert.assertEquals(productInCar.getName(), product.getName());
         Assert.assertEquals(productInCar.getPrice(), selectedProductPrice);
         Order.place(driver);
 
@@ -56,11 +61,10 @@ public class PurchaseProductTest extends BaseTest {
         Assert.assertEquals(purchaseData.getAmount(), selectedProductPrice);
 
         AcceptPurchase.done(driver);
+    }
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+    @DataProvider(name="ProductPurchaseDataProvider")
+    public Object[] productPurchaseDP() throws FileNotFoundException {
+        return JsonTestDataHelper.getInstance().geTestData(loginTestDataPath + "purchaseProduct.json", ProductSelection.class);
     }
 }
