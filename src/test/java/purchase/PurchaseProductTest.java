@@ -8,6 +8,9 @@ import demoBlaze.tasks.home.SaveProduct;
 import demoBlaze.tasks.home.SelectCategory;
 import demoBlaze.tasks.home.SelectProduct;
 import demoBlaze.tasks.navBar.SelectNav;
+import demoBlaze.tasks.orderModal.FillOrder;
+import demoBlaze.tasks.orderModal.IsOrderModalDisplayed;
+import demoBlaze.tasks.orderModal.Purchase;
 import demoBlaze.tasks.product.AddProduct;
 import demoBlaze.tasks.product.GetProduct;
 import org.testng.Assert;
@@ -34,6 +37,10 @@ public class PurchaseProductTest extends BaseTest {
         Assert.assertEquals(productInCar.getName(), productName);
         Assert.assertEquals(productInCar.getPrice(), selectedProductPrice);
         Order.place(driver);
+
+        Assert.assertTrue(IsOrderModalDisplayed.inView(driver));
+        FillOrder.withData(driver, "alan", "123","123","123","123","123");
+        Purchase.complete(driver);
 
         try {
             Thread.sleep(2000);
