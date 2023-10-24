@@ -8,6 +8,10 @@ import org.openqa.selenium.WebDriver;
 public class AddProduct {
     public static void toCart(WebDriver driver){
         Click.on(driver, ProductUI.addCartButton);
+        waitAndAcceptAlert(driver);
+    }
+
+    private static void waitAndAcceptAlert(WebDriver driver) {
         Alert.isPresent(driver);
         Alert.accept(driver);
     }
