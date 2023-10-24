@@ -7,6 +7,6 @@ import org.openqa.selenium.WebDriver;
 
 public class SaveProduct {
     public static int price(WebDriver driver, String name){
-        return NumberExtractor.extract(Label.getText(driver, HomeUI.productPrice(name)));
+        return NumberExtractor.extractInt(Label.getText(driver, HomeUI.productPrice(name)));
     }
 }

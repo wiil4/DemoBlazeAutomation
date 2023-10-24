@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 public class GetProduct {
     public static Product info(WebDriver driver){
         String productName = Label.getText(driver, ProductUI.productLabel);
-        int productPrice = NumberExtractor.extract(Label.getText(driver, ProductUI.productPriceLabel));
+        int productPrice = NumberExtractor.extractInt(Label.getText(driver, ProductUI.productPriceLabel));
         return new Product(productName, productPrice);
     }
 
