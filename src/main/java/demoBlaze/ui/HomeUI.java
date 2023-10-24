@@ -1,4 +1,4 @@
-package demoBlaze.ui.home;
+package demoBlaze.ui;
 
 import org.openqa.selenium.By;
 
