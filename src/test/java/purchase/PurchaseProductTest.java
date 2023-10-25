@@ -31,7 +31,7 @@ import java.io.IOException;
 
 public class PurchaseProductTest extends BaseTest {
 
-    public static String loginTestDataPath = "resources/testdata/purchase/";
+    public static String purchaseTestDataPath = "resources/testdata/purchase/";
 
     @Test(description = "Verify product purchase by product name", dataProvider = "ProductPurchaseDataProvider")
     public void purchaseProductByName(ProductSelection product) throws IOException {
@@ -52,11 +52,11 @@ public class PurchaseProductTest extends BaseTest {
         Order.place(driver);
 
         String orderName = "Wil1234";
-        //Assert.assertTrue(IsOrderModalDisplayed.inView(driver), "Order modal is not visible as expected");
+        Assert.assertTrue(IsOrderModalDisplayed.inView(driver), "Order modal is not visible as expected");
         FillOrder.withData(driver, orderName, "123","123","123","123","123");
         Purchase.complete(driver);
 
-        //Assert.assertTrue(IsPurchaseDoneDisplayed.inView(driver), "Purchase done modal is not visible as expected");
+        Assert.assertTrue(IsPurchaseDoneDisplayed.inView(driver), "Purchase done modal is not visible as expected");
         Assert.assertEquals(GetThankPurchase.text(driver), "Thank you for your purchase!", "Purchase thank is not visible");
 
         PurchaseData purchaseData = GetPurchase.info(driver);
@@ -68,6 +68,6 @@ public class PurchaseProductTest extends BaseTest {
 
     @DataProvider(name="ProductPurchaseDataProvider")
     public Object[] productPurchaseDP() throws FileNotFoundException {
-        return JsonTestDataHelper.getInstance().geTestData(loginTestDataPath + "purchaseProduct.json", ProductSelection.class);
+        return JsonTestDataHelper.getInstance().geTestData(purchaseTestDataPath + "purchaseProduct.json", ProductSelection.class);
     }
 }

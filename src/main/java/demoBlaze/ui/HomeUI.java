@@ -13,4 +13,6 @@ public class HomeUI {
     public static By productPrice(String productName){
         return By.xpath("//a[text()='"+productName+"']//parent::h4//following-sibling::h5");
     }
+
+    public static By loggedUserLabel = By.id("nameofuser");
 }
