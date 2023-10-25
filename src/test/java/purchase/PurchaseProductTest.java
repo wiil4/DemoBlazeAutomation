@@ -1,7 +1,9 @@
 package purchase;
 
+import com.aventstack.extentreports.Status;
 import conf.BaseTest;
 import demoBlaze.helpers.jsonDataHelper.JsonTestDataHelper;
+import demoBlaze.helpers.reportHelper.ReportManager;
 import demoBlaze.models.Product;
 import demoBlaze.models.testData.ProductSelection;
 import demoBlaze.models.PurchaseData;
@@ -25,14 +27,15 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class PurchaseProductTest extends BaseTest {
 
     public static String loginTestDataPath = "resources/testdata/purchase/";
 
     @Test(description = "Verify product purchase by product name", dataProvider = "ProductPurchaseDataProvider")
-    public void purchaseProductByName(ProductSelection product){
-
+    public void purchaseProductByName(ProductSelection product) throws IOException {
+        ReportManager.getInstance().getTest().log(Status.INFO, "Test data:\nCategory:"+product.getCategory()+"\tProduct Name:"+ product.getName());
         SelectCategory.byName(driver, product.getCategory());
         int selectedProductPrice = SaveProduct.price(driver,product.getName());
         SelectProduct.byName(driver, product.getName());

@@ -5,11 +5,11 @@ import org.openqa.selenium.WebDriver;
 public class FactoryBrowser {
     public static WebDriver getDriver(String browserName) throws Exception {
         WebDriver browser = null;
-        switch (browserName){
-            case "Chrome":
+        switch (browserName.toLowerCase()){
+            case "chrome":
                 browser = new ChromeDriverCreator().CreateWebDriver();
                 break;
-            case "Firefox":
+            case "firefox":
                 browser = new FirefoxDriverCreator().CreateWebDriver();
                 break;
             default:

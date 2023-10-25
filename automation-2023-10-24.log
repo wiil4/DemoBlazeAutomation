@@ -1,0 +1,6 @@
+2023-10-24T18:52:02,446 [main] INFO  (JsonTestDataHelper.java:29) - JsonTestDataHelper created
+2023-10-24T18:52:02,451 [main] INFO  (JsonTestDataHelper.java:37) - filePath: resources/testdata/purchase/purchaseProduct.json
+2023-10-24T18:52:02,471 [main] INFO  (JsonTestDataHelper.java:40) - geTestData: [demoBlaze.models.testData.ProductSelection@f74e835, demoBlaze.models.testData.ProductSelection@3276732, demoBlaze.models.testData.ProductSelection@3f28bd56]
+2023-10-24T18:52:43,747 [main] INFO  (JsonTestDataHelper.java:29) - JsonTestDataHelper created
+2023-10-24T18:52:43,751 [main] INFO  (JsonTestDataHelper.java:37) - filePath: resources/testdata/purchase/purchaseProduct.json
+2023-10-24T18:52:43,771 [main] INFO  (JsonTestDataHelper.java:40) - geTestData: [demoBlaze.models.testData.ProductSelection@2a3591c5, demoBlaze.models.testData.ProductSelection@34a75079, demoBlaze.models.testData.ProductSelection@346a361]
