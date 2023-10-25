@@ -9,8 +9,7 @@ import org.openqa.selenium.WebDriver;
 import java.io.IOException;
 
 public class Purchase {
-    public static void complete(WebDriver driver) throws IOException {
+    public static void complete(WebDriver driver){
         Click.on(driver, OrderModalUI.purchaseButton);
-        ScreenShotHelper.takeScreenShotAndAdToHTMLReport(driver, Status.INFO, "Purchase Completed Modal");
     }
 }

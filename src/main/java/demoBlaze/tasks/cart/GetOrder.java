@@ -1,6 +1,7 @@
 package demoBlaze.tasks.cart;
 
 import demoBlaze.actions.Label;
+import demoBlaze.actions.WaitUntilElement;
 import demoBlaze.helpers.mathsHelper.NumberExtractor;
 import demoBlaze.models.Product;
 import demoBlaze.ui.CartUI;

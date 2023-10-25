@@ -1,13 +1,18 @@
 package demoBlaze.tasks.purchaseDoneModal;
 
+import com.aventstack.extentreports.Status;
 import demoBlaze.actions.Label;
 import demoBlaze.helpers.mathsHelper.NumberExtractor;
+import demoBlaze.helpers.reportHelper.ScreenShotHelper;
 import demoBlaze.models.PurchaseData;
 import demoBlaze.ui.PurchaseDoneUI;
 import org.openqa.selenium.WebDriver;
 
+import java.io.IOException;
+
 public class GetPurchase {
-    public static PurchaseData info(WebDriver driver){
+    public static PurchaseData info(WebDriver driver) throws IOException {
+        ScreenShotHelper.takeScreenShotAndAdToHTMLReport(driver, Status.INFO, "Purchase Completed Modal");
         String t = Label.getText(driver, PurchaseDoneUI.purchaseInfoLabel);
         String[] lines = t.split( "\n");
 
