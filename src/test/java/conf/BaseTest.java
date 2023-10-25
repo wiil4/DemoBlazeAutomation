@@ -9,17 +9,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
     protected WebDriver driver;
-    private String browser = "firefox";
-    private String url = "https://www.demoblaze.com/";
     private static final Logger log = LogManager.getLogger(BaseTest.class);
 
     @BeforeSuite
@@ -28,7 +23,8 @@ public class BaseTest {
     }
 
     @BeforeMethod
-    public void setUp(ITestResult iTestResult) throws Exception {
+    @Parameters({"url", "browser"})
+    public void setUp(ITestResult iTestResult, String url, String browser) throws Exception {
         ReportManager.getInstance().startTest(iTestResult.getMethod().getDescription());
         driver = FactoryBrowser.getDriver(browser);
         driver.manage().window().maximize();

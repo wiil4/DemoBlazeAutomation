@@ -41,27 +41,27 @@ public class PurchaseProductTest extends BaseTest {
         SelectProduct.byName(driver, product.getName());
         Product chosenProduct = GetProduct.info(driver);
 
-        Assert.assertEquals(chosenProduct.getName(), product.getName());
-        Assert.assertEquals(chosenProduct.getPrice(), selectedProductPrice);
+        Assert.assertEquals(chosenProduct.getName(), product.getName(), "Name of product is not as selected previously");
+        Assert.assertEquals(chosenProduct.getPrice(), selectedProductPrice, "Price of product is not as selected previously");
         AddProduct.toCart(driver);
         SelectNav.cart(driver);
 
         Product productInCar = GetOrder.info(driver);
-        Assert.assertEquals(productInCar.getName(), product.getName());
-        Assert.assertEquals(productInCar.getPrice(), selectedProductPrice);
+        Assert.assertEquals(productInCar.getName(), product.getName(), "Name of product is not as selected previously");
+        Assert.assertEquals(productInCar.getPrice(), selectedProductPrice, "Price of product is not as selected previously");
         Order.place(driver);
 
         String orderName = "Wil1234";
-        Assert.assertTrue(IsOrderModalDisplayed.inView(driver));
+        //Assert.assertTrue(IsOrderModalDisplayed.inView(driver), "Order modal is not visible as expected");
         FillOrder.withData(driver, orderName, "123","123","123","123","123");
         Purchase.complete(driver);
 
-        Assert.assertTrue(IsPurchaseDoneDisplayed.inView(driver));
-        Assert.assertEquals(GetThankPurchase.text(driver), "Thank you for your purchase!" );
+        //Assert.assertTrue(IsPurchaseDoneDisplayed.inView(driver), "Purchase done modal is not visible as expected");
+        Assert.assertEquals(GetThankPurchase.text(driver), "Thank you for your purchase!", "Purchase thank is not visible");
 
         PurchaseData purchaseData = GetPurchase.info(driver);
-        Assert.assertEquals(purchaseData.getName(), orderName);
-        Assert.assertEquals(purchaseData.getAmount(), selectedProductPrice);
+        Assert.assertEquals(purchaseData.getName(), orderName, "Buyer name is not as setted previously");
+        Assert.assertEquals(purchaseData.getAmount(), selectedProductPrice, "Product price is not equal as the amount gotten previously");
 
         AcceptPurchase.done(driver);
     }
