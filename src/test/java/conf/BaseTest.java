@@ -24,7 +24,7 @@ public class BaseTest {
 
     @BeforeMethod
     @Parameters({"url", "browser"})
-    public void setUp(ITestResult iTestResult, @Optional("https://www.demoblaze.com") String url, @Optional("chrome") String browser) throws Exception {
+    public void setUp(ITestResult iTestResult, @Optional("https://www.demoblaze.com") String url, @Optional("firefox") String browser) throws Exception {
         ReportManager.getInstance().startTest(iTestResult.getMethod().getDescription());
         driver = FactoryBrowser.getDriver(browser);
         driver.manage().window().maximize();

@@ -1,7 +1,9 @@
 package login;
 
+import com.aventstack.extentreports.Status;
 import conf.BaseTest;
 import demoBlaze.helpers.jsonDataHelper.JsonTestDataHelper;
+import demoBlaze.helpers.reportHelper.ReportManager;
 import demoBlaze.models.testData.LoginData;
 import demoBlaze.tasks.home.GetLoggedUser;
 import demoBlaze.tasks.home.IsUserLoggedDisplayed;
@@ -18,6 +20,7 @@ public class LoginTest extends BaseTest {
     public static String loginTestDataPath = "resources/testdata/login/";
     @Test (description = "Login with valid credentials", dataProvider = "validLoginDP")
     public void loginWithValidCredentials(LoginData loginData) throws IOException {
+        ReportManager.getInstance().getTest().log(Status.INFO, "Test data: "+ loginData.toString());
         SelectNav.login(driver);
         Login.withValidCredentials(driver, loginData.getUsername(), loginData.getPassword());
 

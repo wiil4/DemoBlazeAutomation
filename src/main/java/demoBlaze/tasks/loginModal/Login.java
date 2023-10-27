@@ -14,6 +14,5 @@ public class Login {
         Enter.text(driver, LoginModalUI.usernameInput, username);
         Enter.text(driver, LoginModalUI.passwordInput, password);
         Click.on(driver, LoginModalUI.loginButton);
-        ScreenShotHelper.takeScreenShotAndAdToHTMLReport(driver, Status.INFO, "User logged in");
     }
 }
