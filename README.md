@@ -6,7 +6,9 @@ Currently, it supports chrome and firefox browsers. Both web drivers are located
 * Full regression suite will test all test cases in both browsers.
 
 ## About Reporting
-It creates a report inside the folder **Reports** listing all the test cases executed and it also takes screenshots during the testing processes.
+It creates a report inside the folder [**Report**](/Reports) listing all the test cases executed and it also takes screenshots during the testing processes.
+
+<img src="resources/img/reportScreenshot.png" width="700">
 
 ## Test Cases
 Currently test cases created are listed below:
