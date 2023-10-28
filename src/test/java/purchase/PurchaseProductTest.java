@@ -4,6 +4,7 @@ import com.aventstack.extentreports.Status;
 import conf.BaseTest;
 import demoBlaze.helpers.jsonDataHelper.JsonTestDataHelper;
 import demoBlaze.helpers.reportHelper.ReportManager;
+import demoBlaze.models.OrderData;
 import demoBlaze.models.Product;
 import demoBlaze.models.testData.ProductSelection;
 import demoBlaze.models.PurchaseData;
@@ -51,16 +52,16 @@ public class PurchaseProductTest extends BaseTest {
         Assert.assertEquals(productInCar.getPrice(), selectedProductPrice, "Price of product is not as selected previously");
         Order.place(driver);
 
-        String orderName = "Wil1234";
+        OrderData orderData = new OrderData();
         Assert.assertTrue(IsOrderModalDisplayed.inView(driver), "Order modal is not visible as expected");
-        FillOrder.withData(driver, orderName, "123","123","123","123","123");
+        FillOrder.withData(driver, orderData);
         Purchase.complete(driver);
 
         Assert.assertTrue(IsPurchaseDoneDisplayed.inView(driver), "Purchase done modal is not visible as expected");
         Assert.assertEquals(GetThankPurchase.text(driver), "Thank you for your purchase!", "Purchase thank is not visible");
 
         PurchaseData purchaseData = GetPurchase.info(driver);
-        Assert.assertEquals(purchaseData.getName(), orderName, "Buyer name is not as setted previously");
+        Assert.assertEquals(purchaseData.getName(), orderData.getName(), "Buyer name is not as set previously");
         Assert.assertEquals(purchaseData.getAmount(), selectedProductPrice, "Product price is not equal as the amount gotten previously");
 
         AcceptPurchase.done(driver);
